@@ -60,12 +60,20 @@ function component(width, height, color, x, y, type) {
         this.x += this.speedX;
         this.y += this.speedY + this.gravitySpeed;
     }
+
+    this.floor = function(){
+       console.log(this.y);
+        if(this.y > 200){ 
+            stopGame();
+        }
+    }
 }
 
 function updateGameArea() {
     myGameArea.clear();
     myGamePiece.newPos();
     myGamePiece.update();
+<<<<<<< HEAD
 }
 
 // Make the DIV element draggable:
@@ -110,4 +118,7 @@ function dragElement(elmnt) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
+=======
+    myGamePiece.floor();
+>>>>>>> 6ac42b93cd76f1fe03394a8685a861b0987547ee
 }
