@@ -60,10 +60,18 @@ function component(width, height, color, x, y, type) {
         this.x += this.speedX;
         this.y += this.speedY + this.gravitySpeed;        
     }
+
+    this.floor = function(){
+       console.log(this.y);
+        if(this.y > 200){ 
+            stopGame();
+        }
+    }
 }
 
 function updateGameArea() {
     myGameArea.clear();
     myGamePiece.newPos();
     myGamePiece.update();
+    myGamePiece.floor();
 }
