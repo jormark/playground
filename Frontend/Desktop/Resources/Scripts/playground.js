@@ -80,7 +80,7 @@ var imageSquare = function () {
     return Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, 400, 240, {
         render: {
             sprite: {
-                texture: 'image.jpg',
+                texture: 'resources/assets/image.jpg',
             }
         }
     });
