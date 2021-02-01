@@ -2,7 +2,7 @@ var viewportWidth = document.documentElement.clientWidth;
 console.log("load width" + viewportWidth);
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
-
+var canvasDiv = document.getElementById("canvasDiv");
 
 
 
@@ -112,6 +112,7 @@ function makeImg() {
 
 // add all of the bodies to the world
 World.add(engine.world, [ground, leftWall, rightWall, ceiling]);
+
 
 // run the engine
 Engine.run(engine);

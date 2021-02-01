@@ -11,12 +11,43 @@
 </head>
 
 <body style="height: 100vh">
+  
+        <div id="navbarL">
+            <div id="mySidenavL" class="sidenavL">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNavL()">&times;</a>
+                <button id="button" style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
+                <button id="button" style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create Image</button>
+                <button id="button" style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create Circle</button>
+            </div>
+            
+                <span onclick="openNavL()"><img src="Resources/Assets/New asset plus.png"></span>
+            </div> 
+        
+        <div id="navbar">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
+        </div>
+        
+            <span onclick="openNav()"><img src="Resources/Assets/Playground logo.png"></span>
+        </div> 
 
-    <button id="button" style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
-    <button id="button" style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create Image</button>
-    <button id="button" style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create Circle</button>
-   
-
+    <script>function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+      function openNavL() {
+        document.getElementById("mySidenavL").style.width = "250px";
+      }
+      function closeNavL() {
+        document.getElementById("mySidenavL").style.width = "0";
+      }
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }</script>
+    <script src="resources/scripts/js.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="resources/scripts/matter.js"></script>
     <script src="resources/scripts/playground.js"></script>
