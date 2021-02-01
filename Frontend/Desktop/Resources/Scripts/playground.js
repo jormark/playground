@@ -1,15 +1,10 @@
 var viewportWidth = document.documentElement.clientWidth;
+console.log("load width" + viewportWidth);
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
 
-window.addEventListener('resize', function () {
-    viewportWidth = document.documentElement.clientWidth;
-    viewportHeight = document.documentElement.clientHeight;
-    Engine.clear(engine);
-    Render.stop(render);
-    Engine.run(engine);
-    Render.run(render);
-});
+
+
 
 // module aliases
 var Engine = Matter.Engine,
@@ -34,6 +29,18 @@ var render = Render.create({
         background: 'FFFFFF'
     }
 });
+
+
+window.addEventListener('resize', function () {
+  
+    Engine.clear(engine);
+    Render.stop(render);
+    Engine.run(engine);
+    Render.run(render);
+    viewportWidth = document.documentElement.clientWidth;
+    viewportHeight = document.documentElement.clientHeight;
+});
+
 
 // create mouse controls
 var mouse = Mouse.create(render.canvas),

@@ -4,15 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <title>Playground</title>
     <link rel="stylesheet" href="resources/styling/reset.css">
+    <link rel="stylesheet" href="resources/styling/style.css">
 </head>
 
 <body style="height: 100vh">
-    <button style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
-    <button style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create Image</button>
-    <button style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create Circle</button>
 
+    <button id="button" style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
+    <button id="button" style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create Image</button>
+    <button id="button" style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create Circle</button>
+   
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="resources/scripts/matter.js"></script>
