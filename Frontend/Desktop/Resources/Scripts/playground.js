@@ -50,10 +50,10 @@ var mouse = Mouse.create(render.canvas),
 World.add(world, mouseConstraint);
 
 // create ground
-var ground = Bodies.rectangle(viewportWidth / 2, viewportHeight, viewportWidth + 10, 100, { isStatic: true, render: { fillStyle: '#DDDDDD' } });
-var leftWall = Bodies.rectangle(0, viewportHeight / 2, 5, viewportHeight + 10, { isStatic: true, render: { fillStyle: '#00000000' } });
-var rightWall = Bodies.rectangle(viewportWidth, viewportHeight / 2, 5, viewportHeight + 10, { isStatic: true, render: { fillStyle: '#00000000' } });
-var ceiling = Bodies.rectangle(viewportWidth / 2, 0, viewportWidth + 10, 5, { isStatic: true, render: { fillStyle: '#00000000' } });
+var ground = Bodies.rectangle(viewportWidth / 2, viewportHeight+200, viewportWidth + 10, 500, { isStatic: true, render: { fillStyle: '#DDDDDD' } });
+var leftWall = Bodies.rectangle(-250, viewportHeight / 2, 500, viewportHeight + 100, { isStatic: true, render: { fillStyle: '#00000000' } });
+var rightWall = Bodies.rectangle(viewportWidth+250, viewportHeight / 2, 500, viewportHeight + 100, { isStatic: true, render: { fillStyle: '#00000000' } });
+var ceiling = Bodies.rectangle(viewportWidth / 2, -250, viewportWidth + 10, 500, { isStatic: true, render: { fillStyle: '#00000000' } });
 
 var ball = function () {
 

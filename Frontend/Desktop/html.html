@@ -9,14 +9,23 @@
 </head>
 
 <body style="height: 100vh">
-    <button style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
-    <button style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create Image</button>
-    <button style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create Circle</button>
-
-
+    <button class="objectButton" style="position: absolute; top: 20px; left: 20px;" onclick="toggleShow(objMenu, this)">+</button>
+    <div class="objectMenu" style="display: none; position: absolute; top: 20px; left: 20px;">
+        <button class="addNew" onclick="makeObj()">Create Multiple</button>
+        <button class="addNew" onclick="makeImg()">Create Image</button>
+        <button class="addNew" onclick="makeCircle()">Create Circle</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="resources/scripts/matter.js"></script>
     <script src="resources/scripts/playground.js"></script>
+    <script>
+    var objMenu = document.querySelector('.objectMenu');
+    function toggleShow(show, hide) {
+        show.setAttribute("style", "display: block; position: absolute;");
+        hide.setAttribute("style", "display: none; position: absolute;");
+    }
+
+    </script>
 </body>
 
 </html>
