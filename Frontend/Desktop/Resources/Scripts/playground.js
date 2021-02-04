@@ -3,6 +3,7 @@ console.log("load width" + viewportWidth);
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
 var canvasDiv = document.getElementById("canvasDiv");
+var gravity = true;
 
 
 
@@ -110,9 +111,22 @@ function makeImg() {
     objects.push(ball2());
 }
 
+function gravToggle() {
+    if(gravity == true) {
+        engine.world.gravity.y = 0;
+        gravity = false;
+    }
+    else if(gravity == false) {
+        engine.world.gravity.y = 1;
+        gravity = true;
+    }
+    else {
+        console.log("Not working");
+    }
+}
+
 // add all of the bodies to the world
 World.add(engine.world, [ground, leftWall, rightWall, ceiling]);
-
 
 // run the engine
 Engine.run(engine);
