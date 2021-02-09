@@ -19,51 +19,56 @@
     <div id="navbarL">
         <div id="mySidenavL" class="sidenavL">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNavL()">&times;</a>
-            <button id="button" style="position: absolute" class="addNew" onclick="makeObj()">Create Multiple</button>
-            <button id="button" style="position: absolute; top: 20px" class="addNew" onclick="makeImg()">Create
-                Image</button>
-            <button id="button" style="position: absolute; top: 40px" class="addNew" onclick="makeCircle()">Create
-                Circle</button>
+            <button id="button" class="addNew" onclick="makeCircle()">CREATE CIRCLE</button>
+            <button id="button" class="addNew" onclick="makeSquare()">CREATE SQUARE</button>
+            <button id="button" class="addNew" onclick="makeRectangle()">CREATE RECTANGLE</button>
+            <button id="button" class="addNew multi" onclick="makeMultiple()">CREATE MULTIPLE CIRCLES</button>
+            <label id="button" for="imgImport" class="addNew newImage">
+                <input type="file" accept="image/png, image/jpeg" id="imgImport" style="display: none"
+                    onchange="importImage(event)">IMPORT IMAGE</label>
         </div>
 
-        <span onclick="openNavL()"><img src="Resources/Assets/New asset plus.png"></span>
+        <span onclick="openNavL()"><img id="plusIcon" src="Resources/Assets/New asset plus.png"></span>
     </div>
 
     <div id="navbar">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="#">ADD COLLABORATORS</a>
-            <a href="#">CHANGE BACKGROUND</a>
-            <a href="#" onclick="gravToggle()">TOGGLE GRAVITY</a>
+            <a href="#"><label for="bgUpload" class="custom-file-upload">
+                    <input type="file" accept="image/png, image/jpeg" id="bgUpload" style="display: none"
+                        onchange="changeBackground(event)">
+                    CHANGE BACKGROUND
+                </label></a>
+            <a href="#" id="gravity" onclick="gravToggle(this)">TOGGLE GRAVITY</a>
             <a href="#">PUBLIC PLAYGROUND</a>
+            <a href="#" id="bouncy" onclick="bouncify(this)">BOUNCIFY</a>
             <a href="#" onclick="saveCoords()">SAVE</a>
+            <a href="#" id="clear" onclick="reset()">CLEAR</a>
         </div>
         <span id="logoArea" onclick="openNav()"><img id="pgLogo" src="Resources/Assets/Playground logo.png"></span>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="resources/scripts/matter.js"></script>
+    <script src="resources/scripts/playground.js"></script>
     <script>function openNav() {
-            document.getElementById("mySidenav").style.width = "25%";
+            document.getElementById("mySidenav").style.width = "20%";
         }
         function openNavL() {
-            document.getElementById("mySidenavL").style.width = "25%";
+            document.getElementById("mySidenavL").style.width = "15%";
         }
         function closeNavL() {
             document.getElementById("mySidenavL").style.width = "0";
         }
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
-        }</script>
-    <script src="resources/scripts/js.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="resources/scripts/matter.js"></script>
-    <script src="resources/scripts/playground.js"></script>
-    <script>
-        var objMenu = document.querySelector('.objectMenu');
-        function toggleShow(show, hide) {
-            show.setAttribute("style", "display: block; position: absolute;");
-            hide.setAttribute("style", "display: none; position: absolute;");
         }
 
+        $('canvas').click(function () {
+            closeNav();
+            closeNavL();
+        });
     </script>
 </body>
 
