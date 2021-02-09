@@ -1,0 +1,93 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+
+body {
+  background: linear-gradient(180deg, #6db9ff 0%, #00227a 100%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#container {
+  width: 85vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 4%;
+
+}
+
+#settimg{
+    height: 13%;
+}
+
+#exitimg{
+    height: 13%;
+}
+
+#logoimg{
+    width: 80%;
+}
+
+#logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:170%;
+    
+    color: white;
+}
+
+#containerBot {
+  width: 85vw;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+}
+
+#playgrounds{
+   
+    width: 80%;
+    height: 100%;
+}
+
+#thumbnails{
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#thumb{
+    width: 31%;
+    height: 47%;
+    background-color: white;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#collab{
+    
+    width: 20%;
+    height: 100%;
+}
+
+#thumb2{
+    width: 98%;
+    height: 47%;
+    background-color: white;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+#botText{
+    font-size: 150%;
+    color: white;
+}
