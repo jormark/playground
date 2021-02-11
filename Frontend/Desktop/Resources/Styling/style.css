@@ -2,21 +2,20 @@
   font-family: 'Roboto', sans-serif;
 }
 
-#container{
+#container {
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#settings{
+#settings {
   width: 100px;
 }
 
-#settingsButton{
+#settingsButton {
   position: absolute;
   right: 0px;
-
   background-color: white;
   border: none;
   text-align: center;
@@ -25,42 +24,93 @@
   font-size: 16px;
 }
 
-#settingsButton:active, 
-#settingsButton:focus 
-{
-    border: 0px none;
- }
+#settingsButton:active, #settingsButton:focus {
+  border: 0px none;
+}
 
-#navbar{
+#navbar {
   position: absolute;
   right: 0px;
 }
 
-#navbarL{
+#navbarL {
   position: absolute;
   left: 0px;
 }
 
-#logoArea{
+#logoArea {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#plusIcon {
+  mix-blend-mode: exclusion;
+}
+
+#gravity {
+  color: #66C8FF;
+}
+
+#clear:hover {
+  color: #ec1431;
+}
+
+.addNew {
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 10px;
+  width: 160px;
+  height: 160px;
+  background-color: #DDDDDD;
+  color: black;
+  transition: background-color 0.2s, color 0.2s ease;
+  font-size: 16px;
+}
+
+.newImage {
+  height: 80px;
+  background-color: #818181;
+  color: white;
+}
+
+.addNew:hover {
+  background-color: #36E25C;
+}
+
+.newImage:hover {
+  background-color: #fd8828;
+}
+
+.multi:hover {
+  background-color: #ff51ff;
 }
 
 .sidenavL {
   height: 100%;
   width: 0;
   position: fixed;
+  display: flex;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: repeat(1fr);
   z-index: 1;
   top: 0;
   left: 0px;
   background-color: #000000ee;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding: 60px 0px;
 }
 
- .sidenav {
+.sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -106,6 +156,7 @@
   font-size: 36px;
   margin-left: 50px;
 }
+
 .sidenavL .closebtn {
   position: absolute;
   top: 0;
