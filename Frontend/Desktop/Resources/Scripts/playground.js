@@ -1,12 +1,12 @@
 var viewportWidth = document.documentElement.clientWidth;
-console.log("load width" + viewportWidth);
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
 var canvasDiv = document.getElementById("canvasDiv");
 var gravity = true;
 
-
-
+var url = new URL(window.location.href);
+var playgroundName1 = url.searchParams.get("name");
+console.log("playgroundName1");
 // module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,

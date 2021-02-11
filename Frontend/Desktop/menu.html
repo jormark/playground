@@ -19,18 +19,22 @@
     </div>
     <div id="containerBot">
         <div id="playgrounds">
-            <p id="botText">Your Playgrounds:</p>
+            <div id="textandplus"><p id="botText">Your Playgrounds:</p><img id="newImage" src="resources/Assets/New asset plus.png" onclick="console.log('hello')"></div>
             <div id="thumbnails">
-                <div id="thumb"> </div>
-                <div id="thumb"> </div>
-                <div id="thumb"> </div>
-                <div id="thumb"> </div>
-                <div id="thumb"> </div>
-                <div id="thumb"> </div>
+                <form id="thumbForm" action="html.html" method="GET">
+                    <div>
+                      <input name="name" style="display: none;" value="JordansPlayground">
+                    </div>
+                    <div style="width: 100%; height: 100%;">
+                      <button id="thumb" onclick="console.log('thumb click')"><p id="playgroundName">Playground 1</p></button>
+                    </div>
+                  </form>
+                  
             </div>
+            
         </div>
         <div id="collab">
-            <p id="botText">Collaborations:</p>
+            <p id="botText2">Collaborations:</p>
             <div id="thumbnails">
             <div id="thumb2"></div>
             <div id="thumb2"></div>
