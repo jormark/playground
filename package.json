@@ -1,0 +1,22 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "Google Jamboard alternative tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jormark/playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jormark/playground/issues"
+  },
+  "homepage": "https://github.com/jormark/playground#readme",
+  "dependencies": {
+    "firebase": "^8.2.7"
+  }
+}

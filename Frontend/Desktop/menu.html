@@ -1,46 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/styling/menu.css">
     <link rel="stylesheet" href="resources/styling/reset.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <title>Menu</title>
 </head>
+
 <body>
+    <div id="popupContainer">
+
+    </div>
     <div id="container">
         <img src="Resources/Assets/round_settings_white_48dp.png" id="settimg">
         <div id="logo"><img id="logoimg" src="Resources/Assets/White Playground logo.png">
-        <p>MENU</p>
+            <p>MENU</p>
         </div>
         <img src="Resources/Assets/round_exit_to_app_white_48dp.png" id="exitimg">
-        
+
     </div>
     <div id="containerBot">
         <div id="playgrounds">
-            <div id="textandplus"><p id="botText">Your Playgrounds:</p><img id="newImage" src="resources/Assets/New asset plus.png" onclick="console.log('hello')"></div>
-            <div id="thumbnails">
-                <form id="thumbForm" action="html.html" method="GET">
-                    <div>
-                      <input name="name" style="display: none;" value="JordansPlayground">
-                    </div>
-                    <div style="width: 100%; height: 100%;">
-                      <button id="thumb" onclick="console.log('thumb click')"><p id="playgroundName">Playground 1</p></button>
-                    </div>
-                  </form>
-                  
+            <div id="textandplus">
+                <p id="botText">Your Playgrounds:</p><img id="newImage" src="resources/Assets/New asset plus.png" onclick="addPlayground()">
             </div>
-            
+
+            <template id="template-overlay-createfolder">
+                <form class="overlay-container">
+                    <div id="settingsStuff">
+                        <h4>
+                            Create A Playground
+                        </h4>
+                        <div>
+                            <input type="text" id="settings-name" value="" placeholder="Playground Name" name="playground_name">
+                            <div id="create-playground-buttons">
+                                <button type="button" name="save" id="settings-save">
+                                    Save
+                                </button>
+                                <button type="button" name="cancel" id="settings-cancel">
+                                    Cancel
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </template>
+
+            <div id="thumbnails">
+              
+
+            </div>
+
         </div>
         <div id="collab">
             <p id="botText2">Collaborations:</p>
             <div id="thumbnails">
-            <div id="thumb2"></div>
-            <div id="thumb2"></div>
-        </div>
+                <div id="thumb2"></div>
+                <div id="thumb2"></div>
+            </div>
         </div>
     </div>
-    
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="/Frontend/Desktop/Resources/Scripts/firebase.js"></script>
+    <script src="Resources/Scripts/menu.js"></script>
 </body>
+
 </html>
