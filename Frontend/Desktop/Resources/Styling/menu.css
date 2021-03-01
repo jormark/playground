@@ -147,12 +147,22 @@ body {
 }
 
 .overlay-container{
-    background-color: red;
-    width: 30%;
-    padding-left: 2%;
-    height: 20%;
-    padding-top: 2%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 2.5%;
     pointer-events: visible;
+}
+
+.overlay-back {
+    z-index: 201;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    display: grid;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
 }
 
 #popupContainer{
@@ -163,4 +173,72 @@ body {
     justify-content: center;
     pointer-events: none;
     align-items: center;
+}
+
+#settings-name{
+    width:100%;
+    border-radius: 5px;
+    padding-left: 0.5rem;
+    background: #C0C0C0;
+    color: black;
+    font-size: 1rem;
+    border: 0.1em;
+    margin-top: 1vw;
+    height: 2rem;
+}
+
+.overlay-container h4 {
+    font-size: 2.3vw;
+    margin: 0rem 0rem 1rem 0rem;
+}
+
+#settings-save{
+    margin-right: 0.5vw;
+}
+
+#settings-save, #settings-cancel {
+    display: inline-block;
+    padding: 0.35em 0.7em;
+    border: 0.1em;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #6DB9FF;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    transition: all 0.2s;
+    }
+
+    #settings-save:hover, #settings-cancel:hover, #settings-delete:hover{
+    background-color: #333333;
+    color: white;
+}
+
+#create-playground-buttons{
+    width: 100%;
+    margin-top: 2vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#buttonsInputDiv{
+  height: 95%;
+}
+
+#settingsStuff{
+    height: 100%;
+}
+
+#overlay-back{
+    z-index: 200;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #000000;
+    transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }

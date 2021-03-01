@@ -13,9 +13,31 @@
 </head>
 
 <body>
-    <div id="popupContainer">
-
+    <div id="overlay-back" class="overlay"></div>
+    <div id="popupContainer" class="overlay overlay-back">
+        <template id="template-overlay-createfolder">
+            <form class="overlay-container">
+                <div id="settingsStuff">
+                    <h4>
+                        Create A Playground
+                    </h4>
+                    <div id="buttonsInputDiv">
+                        <input type="text" id="settings-name" value="" placeholder="Playground Name" name="playground_name">
+                        <div id="create-playground-buttons">
+                            <button type="button" name="save" id="settings-save">
+                                Save
+                            </button>
+                            <button type="button" name="cancel" id="settings-cancel">
+                                Cancel
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </template>
     </div>
+    
     <div id="container">
         <img src="Resources/Assets/round_settings_white_48dp.png" id="settimg">
         <div id="logo"><img id="logoimg" src="Resources/Assets/White Playground logo.png">
@@ -30,27 +52,7 @@
                 <p id="botText">Your Playgrounds:</p><img id="newImage" src="resources/Assets/New asset plus.png" onclick="addPlayground()">
             </div>
 
-            <template id="template-overlay-createfolder">
-                <form class="overlay-container">
-                    <div id="settingsStuff">
-                        <h4>
-                            Create A Playground
-                        </h4>
-                        <div>
-                            <input type="text" id="settings-name" value="" placeholder="Playground Name" name="playground_name">
-                            <div id="create-playground-buttons">
-                                <button type="button" name="save" id="settings-save">
-                                    Save
-                                </button>
-                                <button type="button" name="cancel" id="settings-cancel">
-                                    Cancel
-                                </button>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </template>
+            
 
             <div id="thumbnails">
               
@@ -66,7 +68,6 @@
             </div>
         </div>
     </div>
-
 
 
     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>

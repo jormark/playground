@@ -2,8 +2,8 @@ var viewportWidth = document.documentElement.clientWidth;
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
 var playgroundCanvas = document.querySelector("canvas");
-var gravity = true;
-var bouncy = false;
+var gravity;
+var bouncy;
 var backgroundIMG = "";
 var bouncefriction = 0.1,
     bouncefrictionAir = 0.001,
@@ -11,10 +11,116 @@ var bouncefriction = 0.1,
 var newImgHeight,
     newImgWidth,
     newImageURL;
+var PlaygroundDoc = db.collection("Playground").doc("Grounds");
 
+//puts all playgrounds into array
+var groundArray = [];
+PlaygroundDoc.get().then((doc) => {
+    doc.data().groundList.forEach(doc => {
+        if(doc.name!=playgroundName1){
+            groundArray.push(doc);
+        }
+       
+    })
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
+
+
+
+//groundArray CONTAINS ALL PLAYGROUNDS IN AN ARRAY, groundData CONTAINS DATA FOR CURRENTLY SELECTED PLAYGROUND IN AN OBJECT
+
+//take name from url and use it to pull correct data from firebase
 var url = new URL(window.location.href);
-var playgroundName1 = url.searchParams.get("name");
-console.log("playgroundName1");
+var playgroundName1 = url.searchParams.get("thumb");
+var groundData = new Object;
+var gravityButton = document.getElementById("gravity");
+var bouncyButton = document.getElementById("bouncy");
+
+PlaygroundDoc.get().then((doc) => {
+    doc.data().groundList.forEach(doc => {
+        if(doc.name == playgroundName1){
+            groundData.gravity = doc.gravity;
+            groundData.gravityMultiplier = doc.gravityMultiplier;
+            groundData.itemArray = doc.itemArray;
+            groundData.name = doc.name;
+            groundData.public = doc.public;
+            groundData.bouncy = doc.bouncy;
+        }
+    })
+    function pageLoaded(){
+        if(groundData.gravity==false){
+                engine.world.gravity.y = 0;
+                gravityButton.setAttribute("style", "color: #818181");
+                gravity = false;
+                groundData.gravity = false;
+            }
+            else if (groundData.gravity == true) {
+                engine.world.gravity.y = 1;
+                gravityButton.setAttribute("style", "color: #66C8FF");
+                gravity = true;
+                groundData.gravity = true;
+            }
+            else {
+                console.log("Not working");
+            }
+        }
+
+        if (groundData.bouncy == false) {
+            bouncefriction = 0.1;
+            bouncefrictionAir = 0.001;
+            bouncerestitution = 0;
+            bouncyButton.setAttribute("style", "color: #818181");
+            bouncy = false;
+            groundData.bouncy = false;
+        }
+        else if (groundData.bouncy == true) {
+            bouncefriction = 0.0;
+            bouncefrictionAir = 0.000;
+            bouncerestitution = 1.001;
+            bouncyButton.setAttribute("style", "color: #36E25C");
+            bouncy = true;
+            groundData.bouncy = true;
+        }
+        else {
+            console.log("Not working");
+        }
+
+        for(var i=0; i< groundData.itemArray.length; i++){
+            if(groundData.itemArray[i].name=="ball"){
+                smallCircle();
+            }
+            if(groundData.itemArray[i].name=="ball2"){
+                makeCircle();
+            }
+            if(groundData.itemArray[i].name=="square1"){
+                makeSquare();
+            }
+            if(groundData.itemArray[i].name=="rectangle1"){
+                makeRectangle();
+            }
+        }
+    pageLoaded();
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
+function getAllCoords(){
+    groundData.itemArray = [];
+    for(var i=0; i<engine.world.bodies.length; i++){
+        var object = {};
+        object.position = engine.world.bodies[i].position; 
+        object.name = engine.world.bodies[i].render.name;
+        
+
+        groundData.itemArray.push(object);
+    }
+    groundData.itemArray.splice(0,4);
+    console.log(groundData);
+}
+
+
 // module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,
@@ -64,7 +170,8 @@ var ceiling = Bodies.rectangle(viewportWidth / 2, -250, viewportWidth + 10, 500,
 var ball = function () {
     let circle = Bodies.circle(viewportWidth / 2, 20, 20, {
         render: {
-            fillStyle: '#00FFFF'
+            fillStyle: '#00FFFF',
+            name: "ball",
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -76,7 +183,8 @@ var ball = function () {
 var ball2 = function () {
     let circle2 = Bodies.circle(viewportWidth / 2, 40, 40, {
         render: {
-            fillStyle: '#0000FF'
+            fillStyle: '#0000FF',
+            name: "ball2",
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -88,7 +196,8 @@ var ball2 = function () {
 var square1 = function () {
     let square = Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, 40, 40, {
         render: {
-            fillStyle: '#FF0000'
+            fillStyle: '#FF0000',
+            name: "square1",
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -100,7 +209,9 @@ var square1 = function () {
 var rectangle1 = function () {
     let rectangle = Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, 300, 50, {
         render: {
-            fillStyle: '#DDDDDD'
+            fillStyle: '#DDDDDD',
+            name: "rectangle1",
+
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -127,6 +238,12 @@ function makeMultiple() {
         World.add(engine.world, ball());
         objects.push(ball());
     }
+}
+
+
+function smallCircle() {
+    World.add(engine.world, ball());
+    objects.push(ball());
 }
 
 function makeCircle() {
@@ -167,11 +284,13 @@ function gravToggle(gravButton) {
         engine.world.gravity.y = 0;
         gravButton.setAttribute("style", "color: #818181");
         gravity = false;
+        groundData.gravity = false;
     }
     else if (gravity == false) {
         engine.world.gravity.y = 1;
         gravButton.setAttribute("style", "color: #66C8FF");
         gravity = true;
+        groundData.gravity = true;
     }
     else {
         console.log("Not working");
@@ -185,6 +304,7 @@ function bouncify(bouncyButton) {
         bouncerestitution = 0;
         bouncyButton.setAttribute("style", "color: #818181");
         bouncy = false;
+        groundData.bouncy = false;
     }
     else if (bouncy == false) {
         bouncefriction = 0.0;
@@ -192,6 +312,7 @@ function bouncify(bouncyButton) {
         bouncerestitution = 1.001;
         bouncyButton.setAttribute("style", "color: #36E25C");
         bouncy = true;
+        groundData.bouncy = true;
     }
     else {
         console.log("Not working");
@@ -199,7 +320,13 @@ function bouncify(bouncyButton) {
 }
 
 function saveCoords() {
-    console.log(objects);
+    getAllCoords();
+    console.log(engine.world);
+    groundArray.push(groundData);
+    PlaygroundDoc.update({
+        groundList: groundArray,
+    })
+    groundArray.pop();
 }
 
 function reset() {
@@ -254,7 +381,6 @@ function reset() {
     engine.timing.timeScale = 1;
     engine.world.gravity.y = 1;
     document.querySelector("#gravity").setAttribute("style", "color: #66C8FF");
-    gravity = true;
     Render.run(render);
     playgroundCanvas = document.querySelector("canvas");
 
