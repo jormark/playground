@@ -12,6 +12,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+auth = firebase.auth()
 var db = firebase.firestore();
 db.settings({timestampsInSnapshots: true});
 

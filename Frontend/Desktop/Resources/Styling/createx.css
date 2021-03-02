@@ -1,0 +1,92 @@
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+#signup-holder {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "username"
+        "email"
+        "password"
+        "create"
+        "return";
+        margin-left: auto;
+        margin-right: auto;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+#userfi {
+    grid-area: username;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+#emailfi {
+    grid-area: email;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+#passfi {
+    grid-area: password;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+#button1 {
+    border: solid 1px black;
+    width: 15vw;
+    margin: auto;
+    margin-top: 2%;
+    grid-area: create;
+    border: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    color: white;
+    font-size: 3vw;
+    background-color: purple;
+    border-radius: 10px;
+}
+
+#loginlog {
+    width: 43vh;
+    height: auto;
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sign-field {
+    border: solid 1px black;
+    height: 3.5rem;
+margin: 2%;
+    font-size: 3rem;
+    color: white;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+#return2 {
+    border: solid 1px black;
+    width: 13vw;
+    margin: auto;
+    margin-top: 2%;
+    grid-area: return;
+    border: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    color: white;
+    font-size: 2.5vw;
+    background-color: purple;
+    border-radius: 5px;
+}
