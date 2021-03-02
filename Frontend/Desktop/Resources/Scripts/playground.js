@@ -12,6 +12,12 @@ var newImgHeight,
     newImgWidth,
     newImageURL;
 var PlaygroundDoc = db.collection("Playground").doc("Grounds");
+var ref = firebase.storage().ref();
+var background = {
+};
+var xPos, 
+    yPos; 
+
 
 //puts all playgrounds into array
 var groundArray = [];
@@ -89,18 +95,30 @@ PlaygroundDoc.get().then((doc) => {
 
         for(var i=0; i< groundData.itemArray.length; i++){
             if(groundData.itemArray[i].name=="ball"){
-                smallCircle();
+                World.add(engine.world, ball(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y));
             }
             if(groundData.itemArray[i].name=="ball2"){
-                makeCircle();
+                World.add(engine.world, ball2(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y));
             }
             if(groundData.itemArray[i].name=="square1"){
-                makeSquare();
+                World.add(engine.world, square1(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y));
             }
             if(groundData.itemArray[i].name=="rectangle1"){
-                makeRectangle();
+                World.add(engine.world, rectangle1(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y));
             }
+            if(groundData.itemArray[i].name=="image"){
+                World.add(engine.world, newImage(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y, groundData.itemArray[i].url, groundData.itemArray[i].width, groundData.itemArray[i].height));
+            }
+            if(groundData.itemArray[i].name=="bgImage"){
+                console.log(groundData.itemArray[i].url);
+                playgroundCanvas = document.querySelector("canvas");
+                playgroundCanvas.style.backgroundImage = `url(${groundData.itemArray[i].url})`;
+                playgroundCanvas.style.backgroundSize = "cover";
+            }
+
         }
+        console.log(engine.world.bodies)
+
     pageLoaded();
 }).catch((error) => {
     console.log("Error getting document:", error);
@@ -110,9 +128,13 @@ function getAllCoords(){
     groundData.itemArray = [];
     for(var i=0; i<engine.world.bodies.length; i++){
         var object = {};
-        object.position = engine.world.bodies[i].position; 
+        object.position = engine.world.bodies[i].position;
         object.name = engine.world.bodies[i].render.name;
-        
+        if(object.name == "image"){
+            object.url = engine.world.bodies[i].render.sprite.texture;
+            object.width = engine.world.bodies[i].render.width;
+            object.height = engine.world.bodies[i].render.height;
+        }
 
         groundData.itemArray.push(object);
     }
@@ -120,7 +142,7 @@ function getAllCoords(){
     console.log(groundData);
 }
 
-
+ 
 // module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,
@@ -167,11 +189,15 @@ var leftWall = Bodies.rectangle(-250, viewportHeight / 2, 500, viewportHeight + 
 var rightWall = Bodies.rectangle(viewportWidth + 250, viewportHeight / 2, 500, viewportHeight + 100, { isStatic: true, render: { fillStyle: '#00000000' } });
 var ceiling = Bodies.rectangle(viewportWidth / 2, -250, viewportWidth + 10, 500, { isStatic: true, render: { fillStyle: '#00000000' } });
 
-var ball = function () {
-    let circle = Bodies.circle(viewportWidth / 2, 20, 20, {
+var ball = function (xPos, yPos) {
+    let circle = Bodies.circle(0, 20, 20, {
         render: {
             fillStyle: '#00FFFF',
             name: "ball",
+        },
+        position: {
+            x: xPos,
+            y: yPos,
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -180,11 +206,15 @@ var ball = function () {
     return circle;
 }
 
-var ball2 = function () {
-    let circle2 = Bodies.circle(viewportWidth / 2, 40, 40, {
+var ball2 = function (xPos, yPos) {
+    let circle2 = Bodies.circle(0, 40, 40, {
         render: {
             fillStyle: '#0000FF',
             name: "ball2",
+        },
+        position: {
+            x: xPos,
+            y: yPos,
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -193,8 +223,8 @@ var ball2 = function () {
     return circle2;
 }
 
-var square1 = function () {
-    let square = Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, 40, 40, {
+var square1 = function (xPos, yPos) {
+    let square = Bodies.rectangle(xPos, yPos, 40, 40, {
         render: {
             fillStyle: '#FF0000',
             name: "square1",
@@ -206,8 +236,8 @@ var square1 = function () {
     return square;
 }
 
-var rectangle1 = function () {
-    let rectangle = Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, 300, 50, {
+var rectangle1 = function (xPos, yPos) {
+    let rectangle = Bodies.rectangle(xPos, yPos, 300, 50, {
         render: {
             fillStyle: '#DDDDDD',
             name: "rectangle1",
@@ -220,12 +250,15 @@ var rectangle1 = function () {
     return rectangle;
 }
 
-var newImage = function () {
-    return Bodies.rectangle(viewportWidth / 2, viewportHeight / 2, newImgWidth, newImgHeight, {
+var newImage = function (xPos, yPos, url, width, height) {
+    return Bodies.rectangle(xPos, yPos, width, height, {
         render: {
             sprite: {
-                texture: newImageURL,
-            }
+                texture: url,
+            },
+            name: "image",
+            width: width,
+            height: height,
         },
         friction: bouncefriction,
         frictionAir: bouncefrictionAir,
@@ -235,48 +268,75 @@ var newImage = function () {
 
 function makeMultiple() {
     for (var i = 0; i < 10; i++) {
-        World.add(engine.world, ball());
+        World.add(engine.world, ball(viewportWidth/2, viewportHeight / 2));
         objects.push(ball());
     }
 }
 
 
 function smallCircle() {
-    World.add(engine.world, ball());
+    World.add(engine.world, ball(viewportWidth/2, viewportHeight / 2));
     objects.push(ball());
 }
 
 function makeCircle() {
-    World.add(engine.world, ball2());
+    World.add(engine.world, ball2(viewportWidth/2, viewportHeight / 2));
     objects.push(ball2());
 }
 
 function makeSquare() {
-    World.add(engine.world, square1());
+    World.add(engine.world, square1(viewportWidth/2, viewportHeight / 2));
     objects.push(square1());
 }
 
 function makeRectangle() {
-    World.add(engine.world, rectangle1());
+    World.add(engine.world, rectangle1(viewportWidth/2, viewportHeight / 2));
     objects.push(rectangle1());
 }
 
 function importImage(event) {
-    newImageURL = URL.createObjectURL(event.target.files[0]);
+    const file = document.querySelector("#imgImport").files[0];
+
+    const name = file.name + new Date().getTime();
+    const metadata = {
+        contentType:file.type
+
+    }
+    const task = ref.child(name).put(file, metadata)
+
+    task
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url => {
+        var imgobj = {};
+        imgobj.name = "image";
+        imgobj.url = url;
+        groundData.itemArray.push(imgobj);
+        console.log(groundData);
+
+    newImageURL = URL.createObjectURL(file);
     image = new Image();
     image.src = newImageURL;
     image.onload = function () {
         newImgHeight = this.height;
         newImgWidth = this.width;
-        console.log(newImgHeight, newImgWidth, newImageURL);
-        World.add(engine.world, newImage());
-        console.log("Done!");
+        World.add(engine.world, newImage(viewportWidth/2, viewportHeight / 2, url, newImgWidth, newImgHeight));
         objects.push(newImage());
         newImageURL = null;
         newImgHeight = null;
         newImgWidth = null;
         event.target.value = null;
     };
+    })
+    ref.put(file).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+      });
+
+
+    
+
+
+    
+    
 }
 
 function gravToggle(gravButton) {
@@ -321,7 +381,8 @@ function bouncify(bouncyButton) {
 
 function saveCoords() {
     getAllCoords();
-    console.log(engine.world);
+    groundData.itemArray.push(background);
+    console.log(groundData);
     groundArray.push(groundData);
     PlaygroundDoc.update({
         groundList: groundArray,
@@ -390,6 +451,23 @@ var changeBackground = function (event) {
     playgroundCanvas = document.querySelector("canvas");
     backgroundIMG = URL.createObjectURL(event.target.files[0]);
     playgroundCanvas.setAttribute("style", "background: url('" + backgroundIMG + "') 50% 50% / cover;");
+
+    const file = document.querySelector("#bgUpload").files[0];
+
+    const name = "background";
+    const metadata = {
+        contentType:file.type
+
+    }
+    const task = ref.child(name).put(file, metadata)
+
+    task
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url => {
+        background.name = "bgImage";
+        background.url = url;
+    }).catch(err => console.error(err));
+    
 }
 
 // add all of the bodies to the world
