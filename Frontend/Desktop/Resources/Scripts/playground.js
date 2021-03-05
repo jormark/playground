@@ -114,11 +114,12 @@ PlaygroundDoc.get().then((doc) => {
                 playgroundCanvas = document.querySelector("canvas");
                 playgroundCanvas.style.backgroundImage = `url(${groundData.itemArray[i].url})`;
                 playgroundCanvas.style.backgroundSize = "cover";
+                background.name = groundData.itemArray[i].name;
+                background.url = groundData.itemArray[i].url;
             }
 
         }
-        console.log(engine.world.bodies)
-
+        
     pageLoaded();
 }).catch((error) => {
     console.log("Error getting document:", error);
@@ -139,7 +140,7 @@ function getAllCoords(){
         groundData.itemArray.push(object);
     }
     groundData.itemArray.splice(0,4);
-    console.log(groundData);
+    console.log(groundData.itemArray);
 }
 
  
@@ -444,17 +445,18 @@ function reset() {
     document.querySelector("#gravity").setAttribute("style", "color: #66C8FF");
     Render.run(render);
     playgroundCanvas = document.querySelector("canvas");
-
+    background = {};
 }
 
 var changeBackground = function (event) {
+    background = {};
     playgroundCanvas = document.querySelector("canvas");
     backgroundIMG = URL.createObjectURL(event.target.files[0]);
     playgroundCanvas.setAttribute("style", "background: url('" + backgroundIMG + "') 50% 50% / cover;");
 
     const file = document.querySelector("#bgUpload").files[0];
 
-    const name = "background";
+    const name = "background" + playgroundName1;
     const metadata = {
         contentType:file.type
 
