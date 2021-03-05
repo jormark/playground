@@ -10,7 +10,7 @@
 
         // firebase login
         auth.signInWithEmailAndPassword(email, password).then((cred) => {
-            window.location.replace("main.html");
+            window.location.replace("menu.html");
         }).catch(error => document.querySelector("#login-password").style.border = "solid 1px red"
             , document.querySelector("#login-email").style.border = "solid 1px red");
 
