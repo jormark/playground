@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+  <link rel="stylesheet" type="text/css" href="resources/Styling/reset.css">
+  <link rel="stylesheet" type="text/css" href="resources/Styling/login.css">
+  <link rel="stylesheet" type="text/css" href="resources/Styling/createx.css">
+
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  
+<div class="wrapper">
+  <form id="login-holder">
+    <div class="email-input">
+      <input type="email" id="login-email" required value="Email"/>
+    </div>
+    <div class="password-input">
+      <input type="password" id="login-password" required value="Passowrd"/>
+    </div>
+    <button type="button " id="Login">LOGIN</button>
+
+    <a id="create" onclick=account()>Don't have an account?</a>
+    <a onclick=rese() id="forgot">Forgotten your password?</a>
+  </form>
+
+
+  <form class="hol" style="display:none">
+    <button onclick=main() id="return1" type="button">BACK</button>
+    <p id="instru">Enter your email into the box below to receive an email reminder of your password.</p>
+    <input type="email" id="reset-password" required />
+    <button id="send" style="background-color: black">SEND</button>
+  </form>
+
+
+  <form id="signup-holder" style="display:none">
+    <div id="userfi">
+      <input type="displayname" class="sign-field" id="signup-username" required value="Username"/>
+    </div>
+    <div id="emailfi">
+      <input type="email" class="sign-field" id="signup-email" required value="Email"/>
+    </div>
+    <div id="passfi">
+      <input type="password" class="sign-field" id="signup-password" required value="sample"/>
+    </div>
+    <button id="button1">Sign up</button>
+    <button id="return2" onclick=main()>Return</button>
+  </form>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+
+
+<script src="resources/Scripts/firebase.js"></script>
+<script src="resources/Scripts/login.js"></script>
+
+</body>
+
+</html>

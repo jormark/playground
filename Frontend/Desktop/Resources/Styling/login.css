@@ -1,0 +1,190 @@
+html, 
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(180deg, #6db9ff 0%, #00227a 100%);
+    width:100vw;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+  }
+
+input {
+    width: 150%;
+}
+
+#login-holder {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-rows: 2fr 2fr 2fr 2fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "email"
+        "password"
+        "login"
+        "create"
+        "forgot";
+    
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.email-input {
+    grid-area: email;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+#login-email {
+    border: solid 1px black;
+    height: 3.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 3rem;
+    color: white;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+#login-password {
+    border: solid 1px black;
+    height: 3.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 3rem;
+    color: white;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+.password-input {
+    grid-area: password;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+#Login {
+    border: solid 1px black;
+    width: 18rem;
+    margin: auto;
+    grid-area: login;
+    border: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    color:black;
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    color: white;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+#create {
+    grid-area: create;
+    text-decoration: none;
+    color: #006590;
+    margin-top: 1%;
+    font-size: 3vw;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    color: white;
+}
+
+#forgot {
+    grid-area: forgot;
+    text-decoration: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    color: white;
+}
+
+.hol {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1.5fr 1fr;
+    grid-template-areas:
+        "back"
+        "text"
+        "input"
+        "reset"
+        ".";
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    background-size: 100%;
+    height: 100%;
+    width: 50%;
+    background-repeat: no-repeat;
+}
+
+#return1 {
+    grid-area: back;
+    background-color: black;
+    width: 9rem;
+    height: 3rem;
+    padding: none;
+    border: none;
+    color: white;
+    font-size: 2vw;
+    border-radius: 10px;
+}
+
+.backarrow {
+    width: 3rem;
+    margin: auto;
+}
+
+#instru {
+    grid-area: text;
+    text-align: center;
+    font-size: 2vw;
+    color: white;
+}
+
+#reset-password {
+    grid-area: input;
+    border: solid 1px black;
+    height: 2.3rem;
+    width: 99.5%;
+    font-size: 2vw;
+    margin-top: 1.2vw;
+    color: white;
+    border-radius: 10px;
+}
+
+#send {
+    grid-area: reset;
+    background-color: black;
+    color: white;
+    font-size: 3vw;
+    border: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin: auto;
+    margin-top: -1vw;
+    color: white;
+    border-radius: 10px;
+}
