@@ -2,27 +2,72 @@ let template_page_add = document.getElementById('template-overlay-createfolder')
 let overlay_back = document.getElementById('overlay-back');
 let popupContainer = document.getElementById('popupContainer');
 let thumbnailsDiv = document.getElementById('thumbnails');
-var thumbnailDoc = db.collection("Thumbnails").doc("thumbs");
-var PlaygroundDoc = db.collection("Playground").doc("Grounds");
+var newImage = document.getElementById('newImage');
+var thumbnailDoc;
+var PlaygroundDoc;
+var doesExist = false;
+var thumbExists = false;
 let namesArray = [];
 let grounds = [];
 
 overlay_back.style.opacity = '0';
 overlay_back.style.pointerEvents = 'none';
 
+var url = new URL(window.location.href);
+var usermail = url.searchParams.get("email");
 
-//creates elemenets for each of the playground "thumbnails" and puts them on the page
+db.collection("Playground").get().then((querySnapshot) => {
+    querySnapshot.forEach(doc =>{
+        if(doc.id == usermail){
+            console.log("found");
+            PlaygroundDoc = db.collection("Playground").doc(doc.id);
+            doesExist = true;
+        }
+        
+    });
+    if(doesExist==false){
+            console.log("not found");
+            db.collection("Playground").doc(usermail).set({
+                groundList: []
+            })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+            PlaygroundDoc = db.collection("Playground").doc(usermail);
+        }
+});
+
+
+
+db.collection("Thumbnails").get().then((querySnapshot) => {
+    querySnapshot.forEach(doc =>{
+        if(doc.id == usermail){
+            console.log("found");
+            thumbnailDoc = db.collection("Thumbnails").doc(doc.id);
+            thumbExists = true;
+        }
+        
+    });
+    if(thumbExists==false){
+        console.log("not found");
+        db.collection("Thumbnails").doc(usermail).set({
+            names: []
+        })
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+        thumbnailDoc = db.collection("Thumbnails").doc(usermail);
+    }
+    //creates elemenets for each of the playground "thumbnails" and puts them on the page
 function refreshThumbs(){
     thumbnailDoc.get().then((doc) => {
         doc.data().names.forEach(doc => {
-            let input = document.createElement("input");
-            input.name="thumb";
-            input.style = "display: none;";
-            input.value = doc;
-
-            let div1 = document.createElement("div");
-            div1.appendChild(input);
-
             let p = document.createElement("p");
             p.id = "playgroundName";
             
@@ -31,19 +76,11 @@ function refreshThumbs(){
 
             let button = document.createElement("button");
             button.id = "thumb";
+            button.addEventListener("click", function(){
+                window.location = "playground.html?email=" + usermail + "&thumb=" + doc;
+            })
             button.appendChild(p);
-
-            let div2 = document.createElement("div");
-            div2.style = "width: 100%; height: 100%;";
-            div2.appendChild(button);
-
-            let form = document.createElement("form");
-            form.id = "thumbForm";
-            form.action = "playground.html";
-            form.method = "GET";
-            form.appendChild(div1);
-            form.appendChild(div2);
-            thumbnailsDiv.appendChild(form);
+            thumbnailsDiv.appendChild(button);
             console.log("doneso");
         })
     }).catch((error) => {
@@ -53,7 +90,6 @@ function refreshThumbs(){
 
 refreshThumbs();
 
-//gets the list of current playgrounds and puts them in an array called namesArray
 thumbnailDoc.get().then((doc) => {
     doc.data().names.forEach(doc => {
         namesArray.push(doc);
@@ -61,6 +97,14 @@ thumbnailDoc.get().then((doc) => {
 }).catch((error) => {
     console.log("Error getting document:", error);
 });
+
+
+
+
+
+
+
+//gets the list of current playgrounds and puts them in an array called namesArray
 
 //gets the playground data and puts it in an object
 PlaygroundDoc.get().then((doc) => {
@@ -71,12 +115,6 @@ PlaygroundDoc.get().then((doc) => {
     console.log("Error getting document:", error);
 });
 
-//console logs all data from current playgrounds
-db.collection('Playground').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
-        console.log(doc.data());
-    })
-})
 
 //adds inputted name to namesArray, pushes namesArray to firebase
 function newThumb(name){
@@ -108,7 +146,7 @@ function newPlayground(name){
 
 
 //creates form, takes user input, if name already exists create alert, if not, create new playground and thumbnail by calling functions mentioned above, clears all thumbnails and adds them back with new one included
-function addPlayground(){
+newImage.addEventListener("click", function(){
     let form = template_page_add.cloneNode(true).content.children[0];
     overlay_back.style.opacity = '0.3';
     overlay_back.style.pointerEvents = 'all';
@@ -141,8 +179,8 @@ function addPlayground(){
    
 
     popupContainer.appendChild(form);  
+    })
     
 
-    
-}
 
+});

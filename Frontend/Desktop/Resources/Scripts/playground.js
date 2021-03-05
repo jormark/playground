@@ -1,3 +1,12 @@
+var url = new URL(window.location.href);
+var playgroundName1 = url.searchParams.get("thumb");
+var playgroundLocation = url.searchParams.get("email");
+console.log(playgroundName1+ " " + playgroundLocation );
+
+
+var groundData = new Object;
+var gravityButton = document.getElementById("gravity");
+var bouncyButton = document.getElementById("bouncy");
 var viewportWidth = document.documentElement.clientWidth;
 var viewportHeight = document.documentElement.clientHeight;
 var objects = [];
@@ -11,7 +20,7 @@ var bouncefriction = 0.1,
 var newImgHeight,
     newImgWidth,
     newImageURL;
-var PlaygroundDoc = db.collection("Playground").doc("Grounds");
+var PlaygroundDoc = db.collection("Playground").doc(playgroundLocation);
 var ref = firebase.storage().ref();
 var background = {
 };
@@ -38,11 +47,6 @@ PlaygroundDoc.get().then((doc) => {
 //groundArray CONTAINS ALL PLAYGROUNDS IN AN ARRAY, groundData CONTAINS DATA FOR CURRENTLY SELECTED PLAYGROUND IN AN OBJECT
 
 //take name from url and use it to pull correct data from firebase
-var url = new URL(window.location.href);
-var playgroundName1 = url.searchParams.get("thumb");
-var groundData = new Object;
-var gravityButton = document.getElementById("gravity");
-var bouncyButton = document.getElementById("bouncy");
 
 PlaygroundDoc.get().then((doc) => {
     doc.data().groundList.forEach(doc => {
