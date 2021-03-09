@@ -1,9 +1,11 @@
+//pulling down name of user and which playground they selected from url to decide which part of database to go to
+
 var url = new URL(window.location.href);
 var playgroundName1 = url.searchParams.get("thumb");
 var playgroundLocation = url.searchParams.get("email");
 console.log(playgroundName1+ " " + playgroundLocation );
 
-
+//setting variables
 var groundData = new Object;
 var gravityButton = document.getElementById("gravity");
 var bouncyButton = document.getElementById("bouncy");
@@ -46,7 +48,8 @@ PlaygroundDoc.get().then((doc) => {
 
 //groundArray CONTAINS ALL PLAYGROUNDS IN AN ARRAY, groundData CONTAINS DATA FOR CURRENTLY SELECTED PLAYGROUND IN AN OBJECT
 
-//take name from url and use it to pull correct data from firebase
+
+//sets current playground's settings to be the same as they are in the database
 
 PlaygroundDoc.get().then((doc) => {
     doc.data().groundList.forEach(doc => {
@@ -96,7 +99,7 @@ PlaygroundDoc.get().then((doc) => {
         else {
             console.log("Not working");
         }
-
+        //puts all elements in the place that they were last saved
         for(var i=0; i< groundData.itemArray.length; i++){
             if(groundData.itemArray[i].name=="ball"){
                 World.add(engine.world, ball(groundData.itemArray[i].position.x, groundData.itemArray[i].position.y));
@@ -129,6 +132,7 @@ PlaygroundDoc.get().then((doc) => {
     console.log("Error getting document:", error);
 });
 
+//gets coordinates of elements
 function getAllCoords(){
     groundData.itemArray = [];
     for(var i=0; i<engine.world.bodies.length; i++){
@@ -344,6 +348,8 @@ function importImage(event) {
     
 }
 
+//functions to toggle settings of playground
+
 function gravToggle(gravButton) {
     if (gravity == true) {
         engine.world.gravity.y = 0;
@@ -384,6 +390,8 @@ function bouncify(bouncyButton) {
     }
 }
 
+//gets all coordinates and pushes them to database
+
 function saveCoords() {
     getAllCoords();
     groundData.itemArray.push(background);
@@ -394,6 +402,8 @@ function saveCoords() {
     })
     groundArray.pop();
 }
+
+//resets canvas
 
 function reset() {
     render.canvas.remove();
@@ -451,6 +461,8 @@ function reset() {
     playgroundCanvas = document.querySelector("canvas");
     background = {};
 }
+
+//change background
 
 var changeBackground = function (event) {
     background = {};
