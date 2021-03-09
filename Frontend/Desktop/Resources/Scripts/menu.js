@@ -10,12 +10,15 @@ var thumbExists = false;
 let namesArray = [];
 let grounds = [];
 
+//clears effects that are later applied
 overlay_back.style.opacity = '0';
 overlay_back.style.pointerEvents = 'none';
 
+//gets email from url that was put there when user logged in. Email is then used to access individual playgrounds
 var url = new URL(window.location.href);
 var usermail = url.searchParams.get("email");
 
+//checks to see if the user already has a database section for their account. If yes then set database reference to it, if no, create one
 db.collection("Playground").get().then((querySnapshot) => {
     querySnapshot.forEach(doc =>{
         if(doc.id == usermail){
@@ -40,7 +43,7 @@ db.collection("Playground").get().then((querySnapshot) => {
         }
 });
 
-
+//same as before but different section of database
 
 db.collection("Thumbnails").get().then((querySnapshot) => {
     querySnapshot.forEach(doc =>{
@@ -64,7 +67,8 @@ db.collection("Thumbnails").get().then((querySnapshot) => {
         });
         thumbnailDoc = db.collection("Thumbnails").doc(usermail);
     }
-    //creates elemenets for each of the playground "thumbnails" and puts them on the page
+    
+//creates elemenets for each of the playground "thumbnails" and puts them on the page
 function refreshThumbs(){
     thumbnailDoc.get().then((doc) => {
         doc.data().names.forEach(doc => {
@@ -90,6 +94,7 @@ function refreshThumbs(){
 
 refreshThumbs();
 
+//pulls all user's playground's names from database and puts them in an array
 thumbnailDoc.get().then((doc) => {
     doc.data().names.forEach(doc => {
         namesArray.push(doc);
