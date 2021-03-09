@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help</title>
+    <link rel="stylesheet" href="/Frontend/Desktop/Resources/Styling/help.css">
 </head>
+
 <body>
-    <h1 id="header">Playground Help Site</h1>
-    <p>To add a new playground, press the white "+" icon and type the name of the playground you want to make. Then press save.</p>
-    <img src="" alt="">
-    <p>To go to a playground, click on one of the pannels.</p>
-    <p>To logout, press the logout button in the top right.</p>
-    <button>Back to main site</button>
+    <div id="container">
+        <h1 id="header">Playground Help Site</h1>
+        <div id="paras">
+            <p>To add a new playground, press the white "+" icon and type the name of the playground you want to make.
+                Then
+                press save.</p>
+            <img src="Resources/Assets/help1.png" alt="Arrow pointing to plus icon">
+            <p>To go to a playground, click on one of the pannels.</p>
+            <img src="Resources/Assets/help2.png" alt="Arrow pointing to playground pannel">
+            <p>To logout, press the logout button in the top right.</p>
+            <img src="Resources/Assets/help3.png" alt="Arrow pointing to logout icon">
+            <br>
+            <button onclick="window.history.back()">Back to main site</button>
+        </div>
+    </div>
 </body>
+
 </html>
