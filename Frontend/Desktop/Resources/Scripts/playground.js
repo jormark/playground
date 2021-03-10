@@ -192,7 +192,7 @@ var mouse = Mouse.create(render.canvas),
 
 World.add(world, mouseConstraint);
 
-// create ground
+// create ground and walls to act as boundaries for the playground
 var ground = Bodies.rectangle(viewportWidth / 2, viewportHeight + 200, viewportWidth + 10, 500, { isStatic: true, render: { fillStyle: '#DDDDDD' } });
 var leftWall = Bodies.rectangle(-250, viewportHeight / 2, 500, viewportHeight + 100, { isStatic: true, render: { fillStyle: '#00000000' } });
 var rightWall = Bodies.rectangle(viewportWidth + 250, viewportHeight / 2, 500, viewportHeight + 100, { isStatic: true, render: { fillStyle: '#00000000' } });
@@ -401,6 +401,7 @@ function saveCoords() {
         groundList: groundArray,
     })
     groundArray.pop();
+    window.alert("Saved successfully!");
 }
 
 //resets canvas

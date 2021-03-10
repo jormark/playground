@@ -56,6 +56,10 @@
   color: #ec1431;
 }
 
+#goback:hover {
+  color: white;
+}
+
 .addNew {
   outline: none;
   border: none;
